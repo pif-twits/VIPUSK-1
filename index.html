@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NUPL [90] — 9 ноября 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;600&display=swap">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#0E1116}
+  body{font-family:Inter,Arial,sans-serif;color:#E8EAED;overflow:hidden;-webkit-text-size-adjust:100%}
+  .deck{position:fixed;inset:0;overflow:hidden}
+  .deck-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s ease}
+  .deck-slide.active{opacity:1;visibility:visible;pointer-events:auto}
+  .deck-scaler{transform-origin:center center}
+  .slide{position:relative;width:1920px;height:1080px;background:#0E1116;overflow:hidden}
+  .frame{position:absolute;inset:0}
+  .pad{display:flex;flex-direction:column;gap:32px;width:100%;height:100%;padding:128px 128px 160px}
+  .pad-cover{display:flex;flex-direction:column;justify-content:space-between;gap:48px;width:100%;height:100%;padding:128px}
+  .head{display:flex;flex-direction:column;gap:16px;min-width:0}
+  .label{font-family:Inter,Arial,sans-serif;font-size:24px;font-weight:600;line-height:1.4;color:#F59E0B;letter-spacing:3px;text-transform:uppercase;white-space:pre-wrap}
+  .label-lg{font-size:28px}
+  .h1{font-family:'IBM Plex Sans',Arial,sans-serif;font-size:84px;font-weight:600;line-height:1.1;color:#E8EAED;white-space:pre-wrap}
+  .h2{font-family:'IBM Plex Sans',Arial,sans-serif;font-size:60px;font-weight:600;line-height:1.15;color:#E8EAED;white-space:pre-wrap}
+  .sub{font-family:Inter,Arial,sans-serif;font-size:32px;font-weight:400;line-height:1.4;color:#AEB6C2;white-space:pre-wrap}
+  .row{display:flex;flex-direction:row;align-items:flex-start;gap:48px;min-width:0}
+  .graph{width:1040px;height:585px;object-fit:contain;background:#fff;border-radius:12px;display:block;max-width:none;max-height:none;min-width:0}
+  .col{display:flex;flex-direction:column;gap:12px;width:576px;min-width:576px;max-width:576px}
+  .pair{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .val{font-family:Inter,Arial,sans-serif;font-size:34px;font-weight:600;line-height:1.2;color:#E8EAED;white-space:pre-wrap}
+  .val-amber{color:#F59E0B}
+  .cap{font-family:Inter,Arial,sans-serif;font-size:26px;font-weight:400;line-height:1.4;color:#AEB6C2;white-space:pre-wrap}
+  .note{display:flex;flex-direction:column;gap:8px;background:#161B22;border-left:6px solid #F59E0B;border-radius:12px;padding:28px}
+  .note-t{font-family:Inter,Arial,sans-serif;font-size:32px;font-weight:600;line-height:1.2;color:#E8EAED;white-space:pre-wrap}
+  .foot-l{position:absolute;left:128px;bottom:64px;width:1300px;font-family:Inter,Arial,sans-serif;font-size:24px;font-weight:400;line-height:1.4;color:#8A93A0;white-space:pre-wrap}
+  .foot-r{position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:Inter,Arial,sans-serif;font-size:24px;font-weight:400;line-height:1.4;color:#8A93A0}
+  .cards{display:flex;flex-direction:row;align-items:stretch;gap:32px}
+  .card{display:flex;flex-direction:column;gap:12px;flex:1 1 0%;background:#161B22;padding:40px;border-top:6px solid #F59E0B;border-radius:16px}
+  .card-n{font-family:'IBM Plex Sans',Arial,sans-serif;font-size:72px;font-weight:600;line-height:1.1;color:#F59E0B;white-space:pre-wrap}
+  .card-c{font-family:Inter,Arial,sans-serif;font-size:28px;font-weight:400;line-height:1.4;color:#AEB6C2;white-space:pre-wrap}
+  .col-tall{gap:16px}
+  .amber-h{font-family:'IBM Plex Sans',Arial,sans-serif;font-size:36px;font-weight:600;line-height:1.2;color:#F59E0B;white-space:pre-wrap}
+  .list{display:flex;flex-direction:column;gap:16px}
+  .item{background:#161B22;border-left:6px solid #F59E0B;border-radius:12px;padding:24px;font-family:Inter,Arial,sans-serif;font-size:28px;font-weight:400;line-height:1.4;color:#E8EAED;white-space:pre-wrap}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .sum{display:flex;flex-direction:column;gap:8px;background:#161B22;padding:36px;border-top:6px solid #F59E0B;border-radius:16px}
+  .sum-n{font-family:Inter,Arial,sans-serif;font-size:24px;font-weight:600;line-height:1.4;color:#F59E0B}
+  .sum-t{font-family:'IBM Plex Sans',Arial,sans-serif;font-size:34px;font-weight:600;line-height:1.2;color:#E8EAED;white-space:pre-wrap}
+  .sum-c{font-family:Inter,Arial,sans-serif;font-size:26px;font-weight:400;line-height:1.4;color:#AEB6C2;white-space:pre-wrap}
+  .zones{display:flex;flex-direction:row;align-items:stretch;gap:32px}
+  .zone{display:flex;flex-direction:column;gap:8px;flex:1 1 0%;background:#161B22;padding:36px;border-top:8px solid #F59E0B;border-radius:16px}
+  .zone-mid{background:#222A36;border-top-color:#F5D547}
+  .zone-green{border-top-color:#22C55E}
+  .zone-n{font-family:'IBM Plex Sans',Arial,sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#E8EAED;white-space:pre-wrap}
+  .zone-s{font-family:Inter,Arial,sans-serif;font-size:28px;font-weight:400;line-height:1.4;color:#AEB6C2;white-space:pre-wrap}
+  .zone-h{font-family:Inter,Arial,sans-serif;font-size:28px;font-weight:600;line-height:1.4;color:#F5D547;white-space:pre-wrap}
+  .events{display:flex;flex-direction:row;align-items:center;gap:32px}
+  .ev{display:flex;flex-direction:column;gap:8px;flex:1 1 0%;background:#161B22;padding:32px;border-radius:16px}
+  .ev-d{font-family:'IBM Plex Sans',Arial,sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#F59E0B;white-space:pre-wrap}
+  .ev-s{font-family:Inter,Arial,sans-serif;font-size:28px;font-weight:400;line-height:1.4;color:#AEB6C2;white-space:pre-wrap}
+  .verdict{font-family:Inter,Arial,sans-serif;font-size:32px;font-weight:600;line-height:1.4;color:#E8EAED;white-space:pre-wrap}
+  .arrow{width:96px;height:48px;display:block;min-width:0;min-height:0}
+  .hud{position:fixed;right:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:10}
+  .hud button{width:52px;height:52px;border-radius:12px;border:1px solid #2A3341;background:rgba(22,27,34,.85);color:#AEB6C2;font-size:26px;line-height:1;cursor:pointer;font-family:Inter,Arial,sans-serif}
+  .hud button:hover{color:#F59E0B;border-color:#F59E0B}
+  @media (max-width:768px){
+    .hud{right:12px;top:auto;bottom:12px;transform:none;flex-direction:row}
+    .hud button{width:56px;height:56px;font-size:30px}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<section class="deck-slide active" id="cover" aria-label="Слайд 1 из 7" data-label="Снижение на NUPL завершено: Low сформирован 18 августа 2026" data-speaker-notes="Главный вывод презентации: по NUPL [90] снижение завершено, Low на метрике сформирован 18 августа 2026. Три подтверждения: время снижения (564 дня) и цикличность Low→Low (1318 дней) в пределах нормы, закрепление выше 0,25 с 17 сентября 2026. Данные на 7 ноября 2026, источник Glassnode.">
+  <div class="deck-scaler"><div class="slide"><div class="frame">
+    <div class="pad-cover">
+      <div class="head" style="gap:32px">
+        <div class="label label-lg">On-Chain · NUPL [90]</div>
+        <div class="h1" role="heading" aria-level="1">Снижение на NUPL завершено: Low сформирован 18 августа 2026</div>
+        <div class="sub">Нереализованная прибыль / убыток · данные на 7 ноября 2026 · источник Glassnode</div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-n">564 дня</div>
+          <div class="card-c">снижение от High до Low · норма 423–631 дней</div>
+        </div>
+        <div class="card">
+          <div class="card-n">1318 дней</div>
+          <div class="card-c">между Low 2023 и Low 2026 · норма 1287–1421 дней</div>
+        </div>
+        <div class="card">
+          <div class="card-n">выше 0,25</div>
+          <div class="card-c">закрепление 17 сентября 2026 · стадия «Оптимизма»</div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="deck-slide" id="down" aria-label="Слайд 2 из 7" data-label="Снижение заняло 564 дня — в пределах нормы" data-speaker-notes="Снижение NUPL от High (31 января 2025) до Low (18 августа 2026) заняло 564 дня. Норма по статистике метрики: 423–631 дней, в календарных датах 30 марта – 24 октября 2026. Снижение приостановилось внутри этого окна, затем 2,5 месяца показатель только рос.">
+  <div class="deck-scaler"><div class="slide"><div class="frame">
+    <div class="pad">
+      <div class="head">
+        <div class="label">Время снижения</div>
+        <div class="h2" role="heading" aria-level="2">Снижение заняло 564 дня — в пределах нормы</div>
+      </div>
+      <div class="row">
+        <img class="graph" src="assets/down.png" alt="График NUPL (90d EMA) и цены BTC с отмеченными затяжными снижениями: 546, 423, 631 и 564 дня">
+        <div class="col">
+          <div class="pair"><div class="val">546 дней</div><div class="cap">15 декабря 2013 – 14 июня 2015</div></div>
+          <div class="pair"><div class="val">423 дня</div><div class="cap">21 декабря 2017 – 17 февраля 2019</div></div>
+          <div class="pair"><div class="val">631 день</div><div class="cap">17 апреля 2021 – 8 января 2023</div></div>
+          <div class="pair"><div class="val val-amber">564 дня · Low 2026</div><div class="cap">31 января 2025 – 18 августа 2026</div></div>
+          <div class="note">
+            <div class="note-t">Норма: 423–631 дней</div>
+            <div class="cap">Календарное окно: 30 марта – 24 октября 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-l">NUPL [90] · Glassnode · данные на 7 ноября 2026</div>
+    <div class="foot-r">2 / 7</div>
+  </div></div></div>
+</section>
+
+<section class="deck-slide" id="low" aria-label="Слайд 3 из 7" data-label="Между Low прошло 1318 дней — это норма" data-speaker-notes="От Low 8 января 2023 до Low 18 августа 2026 прошло 1318 дней. Норма по статистике: 1287–1421 дней, окно в календарных датах 18 июля – 29 ноября 2026. Low сформирован внутри окна; запас по времени на новый минимум исчисляется 23 днями, поэтому минимум августа 2026 принимается за истинный Low 2026.">
+  <div class="deck-scaler"><div class="slide"><div class="frame">
+    <div class="pad">
+      <div class="head">
+        <div class="label">Цикличность Low → Low</div>
+        <div class="h2" role="heading" aria-level="2">Между Low прошло 1318 дней — это норма</div>
+      </div>
+      <div class="row">
+        <img class="graph" src="assets/low.png" alt="График NUPL (90d EMA) и цены BTC с отмеченным временем между Low: 1287, 1344, 1421 и 1318 дней">
+        <div class="col">
+          <div class="pair"><div class="val">1287 дней</div><div class="cap">5 декабря 2011 – 14 июня 2015</div></div>
+          <div class="pair"><div class="val">1344 дня</div><div class="cap">14 июня 2015 – 17 февраля 2019</div></div>
+          <div class="pair"><div class="val">1421 день</div><div class="cap">17 февраля 2019 – 8 января 2023</div></div>
+          <div class="pair"><div class="val val-amber">1318 дней · Low 2026</div><div class="cap">8 января 2023 – 18 августа 2026</div></div>
+          <div class="note">
+            <div class="note-t">Норма: 1287–1421 дней</div>
+            <div class="cap">Календарное окно: 18 июля – 29 ноября 2026</div>
+            <div class="cap">Запас по времени: 23 дня</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-l">NUPL [90] · Glassnode · данные на 7 ноября 2026</div>
+    <div class="foot-r">3 / 7</div>
+  </div></div></div>
+</section>
+
+<section class="deck-slide" id="zones" aria-label="Слайд 4 из 7" data-label="17 сентября 2026: закрепление выше 0,25" data-speaker-notes="17 сентября 2026 NUPL закрепился выше 0,25: переход из стадии «Страха» в стадию «Оптимизма». Значения Low (около 0,19) и текущее (около 0,3) считаны с графиков Glassnode, в тексте страницы они не указаны. Границы зон соответствуют цветам линии на графике; на графике зелёная зона начинается с 0,5, цель роста по тексту — 0,6.">
+  <div class="deck-scaler"><div class="slide"><div class="frame">
+    <div class="pad">
+      <div class="head">
+        <div class="label">Подтверждение</div>
+        <div class="h2" role="heading" aria-level="2">17 сентября 2026: закрепление выше 0,25</div>
+      </div>
+      <div class="zones">
+        <div class="zone">
+          <div class="zone-n">Страх</div>
+          <div class="zone-s">от 0 до 0,25</div>
+        </div>
+        <div class="zone zone-mid">
+          <div class="zone-n">Оптимизм</div>
+          <div class="zone-s">от 0,25 до 0,5</div>
+          <div class="zone-h">Мы здесь: около 0,3</div>
+        </div>
+        <div class="zone zone-green">
+          <div class="zone-n">Вера</div>
+          <div class="zone-s">зелёная зона графика с 0,5; цель роста — 0,6</div>
+        </div>
+      </div>
+      <div class="events">
+        <div class="ev">
+          <div class="ev-d">18 августа 2026</div>
+          <div class="ev-s">Low на метрике, около 0,19</div>
+        </div>
+        <svg class="arrow" viewBox="0 0 96 48" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,14.4 57.6,14.4 57.6,4.8 96,24 57.6,43.2 57.6,33.6 0,33.6" fill="#AEB6C2"></polygon></svg>
+        <div class="ev">
+          <div class="ev-d">17 сентября 2026</div>
+          <div class="ev-s">закрепление выше 0,25: переход из «Страха» в «Оптимизм»</div>
+        </div>
+      </div>
+      <div class="verdict">Сильный аргумент: рыночная ситуация изменилась в пользу восходящего тренда на bitcoin.</div>
+    </div>
+    <div class="foot-l">NUPL [90] · Glassnode · данные на 7 ноября 2026</div>
+    <div class="foot-r">4 / 7</div>
+  </div></div></div>
+</section>
+
+<section class="deck-slide" id="target" aria-label="Слайд 5 из 7" data-label="Цель роста на метрике — уровень 0,6" data-speaker-notes="Красный диапазон на графике — цель всего движения; его нижняя граница, уровень 0,6, ключевой ориентир (Target) для этапа роста на NUPL. Нахождение выше 0,6 означает крайне высокую нереализованную прибыль, что статистически повышает давление на цену со стороны продаж, и переход цены в стадию «Веры» (поздний этап бычьего рынка). Преодоление 0,6 — предвестник перехода рынка в кульминационную фазу роста. Пунктир — визуализация предполагаемого направления движения.">
+  <div class="deck-scaler"><div class="slide"><div class="frame">
+    <div class="pad">
+      <div class="head">
+        <div class="label">Моделирование</div>
+        <div class="h2" role="heading" aria-level="2">Цель роста на метрике — уровень 0,6</div>
+      </div>
+      <div class="row">
+        <img class="graph" src="assets/target.png" alt="График NUPL (90d EMA) и цены BTC с уровнями 0,25 и 0,6 (Target) и пунктиром предполагаемого движения показателя">
+        <div class="col col-tall">
+          <div class="amber-h">Выше 0,6</div>
+          <div class="list">
+            <div class="item">Нереализованная прибыль крайне высока — растёт давление продаж</div>
+            <div class="item">Переход в стадию «Веры» — поздний этап бычьего рынка</div>
+            <div class="item">Предвестник кульминационной фазы роста</div>
+          </div>
+          <div class="cap">Пунктир на графике — предполагаемое направление движения показателя</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-l">NUPL [90] · Glassnode · данные на 7 ноября 2026</div>
+    <div class="foot-r">5 / 7</div>
+  </div></div></div>
+</section>
+
+<section class="deck-slide" id="now" aria-label="Слайд 6 из 7" data-label="Сейчас NUPL около 0,3, выше уровня 0,25" data-speaker-notes="С 18 августа 2026 снижение показателя прекратилось, последние 2,5 месяца на метрике наблюдался рост. 17 сентября 2026 закрепление выше 0,25 — переход в стадию «Оптимизма». Прямые подтверждения того, что рыночная ситуация изменилась в пользу восходящего тренда как на NUPL, так и на цене bitcoin. Значения около 0,19 и около 0,3 считаны с графиков.">
+  <div class="deck-scaler"><div class="slide"><div class="frame">
+    <div class="pad">
+      <div class="head">
+        <div class="label">Текущая ситуация</div>
+        <div class="h2" role="heading" aria-level="2">Сейчас NUPL около 0,3, выше уровня 0,25</div>
+      </div>
+      <div class="row">
+        <img class="graph" src="assets/now.png" alt="График NUPL (90d EMA) и цены BTC с отметкой «WE HERE» чуть выше уровня 0,25">
+        <div class="col">
+          <div class="pair"><div class="val val-amber">18 августа 2026</div><div class="cap">Low на метрике, около 0,19</div></div>
+          <div class="pair"><div class="val">Более 2,5 месяцев роста</div><div class="cap">с Low показатель только рос</div></div>
+          <div class="pair"><div class="val">Сейчас около 0,3</div><div class="cap">выше 0,25: стадия «Оптимизма»</div></div>
+          <div class="note" style="gap:0">
+            <div class="note-t">Прямые подтверждения в пользу восходящего тренда на NUPL и на цене bitcoin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-l">NUPL [90] · Glassnode · данные на 7 ноября 2026</div>
+    <div class="foot-r">6 / 7</div>
+  </div></div></div>
+</section>
+
+<section class="deck-slide" id="summary" aria-label="Слайд 7 из 7" data-label="Снижение на NUPL завершено" data-speaker-notes="Итог: Low на NUPL сформирован 18 августа 2026 и считается истинным Low 2026. Время снижения и цикличность Low→Low в норме. С 17 сентября 2026 показатель выше 0,25. Ориентир роста — 0,6.">
+  <div class="deck-scaler"><div class="slide"><div class="frame">
+    <div class="pad">
+      <div class="head">
+        <div class="label">Итоги</div>
+        <div class="h2" role="heading" aria-level="2">Снижение на NUPL завершено</div>
+      </div>
+      <div class="grid2">
+        <div class="sum">
+          <div class="sum-n">01</div>
+          <div class="sum-t">Low сформирован</div>
+          <div class="sum-c">Low на NUPL — 18 августа 2026. BTC обычно формирует Low раньше NUPL на 1 месяц и более.</div>
+        </div>
+        <div class="sum">
+          <div class="sum-n">02</div>
+          <div class="sum-t">Время в пределах нормы</div>
+          <div class="sum-c">Снижение: 564 дня (норма 423–631). Low → Low: 1318 дней (норма 1287–1421).</div>
+        </div>
+        <div class="sum">
+          <div class="sum-n">03</div>
+          <div class="sum-t">Рынок изменился</div>
+          <div class="sum-c">17 сентября 2026 закрепление выше 0,25: переход из «Страха» в «Оптимизм».</div>
+        </div>
+        <div class="sum">
+          <div class="sum-n">04</div>
+          <div class="sum-t">Ориентир роста — 0,6</div>
+          <div class="sum-c">Выше 0,6 — «Вера», поздний этап бычьего рынка и предвестник кульминационной фазы роста.</div>
+        </div>
+      </div>
+      <div class="verdict">Подтверждения в пользу восходящего тренда есть и на NUPL, и на цене bitcoin.</div>
+    </div>
+    <div class="foot-l">NUPL [90] · Glassnode · данные на 7 ноября 2026</div>
+    <div class="foot-r">7 / 7</div>
+  </div></div></div>
+</section>
+
+</div>
+
+<div class="hud">
+  <button id="prev" type="button" aria-label="Предыдущий слайд">‹</button>
+  <button id="next" type="button" aria-label="Следующий слайд">›</button>
+</div>
+
+<script>
+(function () {
+  var deck = document.getElementById('deck');
+  var slides = Array.prototype.slice.call(deck.querySelectorAll('.deck-slide'));
+  var scalers = Array.prototype.slice.call(deck.querySelectorAll('.deck-scaler'));
+  var prev = document.getElementById('prev');
+  var next = document.getElementById('next');
+  var current = 0;
+
+  function fit() {
+    var scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    for (var i = 0; i < scalers.length; i++) {
+      scalers[i].style.transform = 'scale(' + scale + ')';
+    }
+  }
+
+  function show(n) {
+    current = Math.max(0, Math.min(slides.length - 1, n));
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].classList.toggle('active', i === current);
+    }
+    prev.disabled = current === 0;
+    next.disabled = current === slides.length - 1;
+    if (window.history && history.replaceState) {
+      history.replaceState(null, '', '#' + (current + 1));
+    }
+  }
+
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', fit);
+  fit();
+
+  prev.addEventListener('click', function () { show(current - 1); });
+  next.addEventListener('click', function () { show(current + 1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { show(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { show(current - 1); e.preventDefault(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+  });
+
+  var startX = 0, startY = 0;
+  document.addEventListener('touchstart', function (e) {
+    var t = e.changedTouches[0];
+    startX = t.clientX; startY = t.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    var t = e.changedTouches[0];
+    var dx = t.clientX - startX;
+    var dy = t.clientY - startY;
+    if (Math.abs(dx) >= 100 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) { show(current + 1); } else { show(current - 1); }
+    }
+  }, { passive: true });
+
+  var fromHash = parseInt((location.hash || '').replace('#', ''), 10);
+  show(isNaN(fromHash) ? 0 : fromHash - 1);
+})();
+</script>
+</body>
+</html>
